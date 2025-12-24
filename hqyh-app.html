@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>唤起 Flutter App 测试</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 30px;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>H5 调起 Flutter App 测试页</h2>
+
+<label>回调地址（callbackScheme）</label>
+<input id="callbackInput" value="tc0hdu://com.bob.games?data=bobYHCallback" />
+
+<button onclick="openApp()">唤起 Flutter App</button>
+
+<script>
+    function openApp() {
+        const callbackScheme = encodeURIComponent(
+            document.getElementById('callbackInput').value
+        );
+
+        // 构造唤起 Flutter App 的 URL
+        const appUrl = `yhopensdk://auth?callbackScheme=${callbackScheme}&appKey=10000&privateKey=jzGE40ZI3BZwRhF`;
+
+        console.log("唤起 APP URL:", appUrl);
+
+        // 直接跳转（scheme 会尝试打开 APP）
+        window.location.href = appUrl;
+
+        // 如果你需要 App 未安装时自动跳转下载页，可以加 setTimeout
+        // setTimeout(() => {
+        //   window.location.href = "https://你的下载页面";
+        // }, 1500);
+    }
+</script>
+
+</body>
+</html>
